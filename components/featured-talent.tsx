@@ -2,55 +2,11 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Instagram, Twitter, Youtube } from "lucide-react";
+import { Instagram, Twitter, Youtube, Music } from "lucide-react";
+import { talentRoster, categoryInfo, calculateAge } from "@/lib/talent-data";
 
-interface TalentMember {
-  id: string;
-  name: string;
-  category: string;
-  image: string;
-  followers: string;
-  socials: {
-    instagram?: string;
-    twitter?: string;
-    youtube?: string;
-  };
-}
-
-const featuredTalent: TalentMember[] = [
-  {
-    id: "1",
-    name: "Maya Johnson",
-    category: "Lifestyle Creator",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop",
-    followers: "2.5M",
-    socials: { instagram: "#", twitter: "#", youtube: "#" },
-  },
-  {
-    id: "2",
-    name: "Marcus Chen",
-    category: "Tech Influencer",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop",
-    followers: "1.8M",
-    socials: { instagram: "#", twitter: "#" },
-  },
-  {
-    id: "3",
-    name: "Aria Williams",
-    category: "Fashion & Beauty",
-    image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=800&fit=crop",
-    followers: "3.2M",
-    socials: { instagram: "#", youtube: "#" },
-  },
-  {
-    id: "4",
-    name: "Jordan Davis",
-    category: "Fitness & Wellness",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=800&fit=crop",
-    followers: "1.5M",
-    socials: { instagram: "#", twitter: "#", youtube: "#" },
-  },
-];
+// Get featured talent
+const featuredTalent = talentRoster.filter((t) => t.featured && t.active).slice(0, 4);
 
 export default function FeaturedTalent() {
   return (
@@ -92,69 +48,86 @@ export default function FeaturedTalent() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group relative"
             >
-              <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
-                {/* Image */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url(${talent.image})` }}
-                />
-                
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent opacity-80" />
-                
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-[#d4a853]/0 group-hover:bg-[#d4a853]/10 transition-colors duration-500" />
-                
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <span className="text-xs uppercase tracking-wider text-[#d4a853] mb-2 block">
-                    {talent.category}
-                  </span>
-                  <h3
-                    className="text-xl font-semibold mb-1"
-                    style={{ fontFamily: "var(--font-playfair)" }}
-                  >
-                    {talent.name}
-                  </h3>
-                  <p className="text-sm text-[#a3a3a3] mb-4">
-                    {talent.followers} followers
-                  </p>
+              <Link href={`/talent/${talent.slug}`}>
+                <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
+                  {/* Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style={{ backgroundImage: `url(${talent.primaryPhoto})` }}
+                  />
                   
-                  {/* Social Links */}
-                  <div className="flex gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                    {talent.socials.instagram && (
-                      <a
-                        href={talent.socials.instagram}
-                        className="w-9 h-9 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#a3a3a3] hover:bg-[#d4a853] hover:text-[#0a0a0a] transition-colors duration-300"
-                        aria-label="Instagram"
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent opacity-80" />
+                  
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-[#d4a853]/0 group-hover:bg-[#d4a853]/10 transition-colors duration-500" />
+                  
+                  {/* Categories Badge */}
+                  <div className="absolute top-4 left-4 flex flex-wrap gap-1">
+                    {talent.categories.slice(0, 2).map((cat) => (
+                      <span
+                        key={cat}
+                        className="text-[10px] px-2 py-0.5 bg-[#0a0a0a]/80 backdrop-blur-sm rounded text-[#d4a853] uppercase tracking-wider"
                       >
-                        <Instagram size={16} />
-                      </a>
-                    )}
-                    {talent.socials.twitter && (
-                      <a
-                        href={talent.socials.twitter}
-                        className="w-9 h-9 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#a3a3a3] hover:bg-[#d4a853] hover:text-[#0a0a0a] transition-colors duration-300"
-                        aria-label="Twitter"
-                      >
-                        <Twitter size={16} />
-                      </a>
-                    )}
-                    {talent.socials.youtube && (
-                      <a
-                        href={talent.socials.youtube}
-                        className="w-9 h-9 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#a3a3a3] hover:bg-[#d4a853] hover:text-[#0a0a0a] transition-colors duration-300"
-                        aria-label="YouTube"
-                      >
-                        <Youtube size={16} />
-                      </a>
-                    )}
+                        {categoryInfo[cat].label}
+                      </span>
+                    ))}
                   </div>
+
+                  {/* Content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3
+                      className="text-xl font-semibold mb-1"
+                      style={{ fontFamily: "var(--font-playfair)" }}
+                    >
+                      {talent.name}
+                    </h3>
+                    <p className="text-sm text-[#a3a3a3] mb-4">
+                      {calculateAge(talent.birthDate)} years old
+                      {talent.location && ` • ${talent.location}`}
+                    </p>
+                    
+                    {/* Social Links */}
+                    <div className="flex gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                      {talent.socials.instagram && (
+                        <span
+                          className="w-9 h-9 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#a3a3a3]"
+                          aria-label="Instagram"
+                        >
+                          <Instagram size={16} />
+                        </span>
+                      )}
+                      {talent.socials.tiktok && (
+                        <span
+                          className="w-9 h-9 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#a3a3a3]"
+                          aria-label="TikTok"
+                        >
+                          <Music size={16} />
+                        </span>
+                      )}
+                      {talent.socials.youtube && (
+                        <span
+                          className="w-9 h-9 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#a3a3a3]"
+                          aria-label="YouTube"
+                        >
+                          <Youtube size={16} />
+                        </span>
+                      )}
+                      {talent.socials.twitter && (
+                        <span
+                          className="w-9 h-9 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#a3a3a3]"
+                          aria-label="Twitter"
+                        >
+                          <Twitter size={16} />
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Border Effect */}
+                  <div className="absolute inset-0 rounded-lg border border-[#262626] group-hover:border-[#d4a853]/50 transition-colors duration-500" />
                 </div>
-                
-                {/* Border Effect */}
-                <div className="absolute inset-0 rounded-lg border border-[#262626] group-hover:border-[#d4a853]/50 transition-colors duration-500" />
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>

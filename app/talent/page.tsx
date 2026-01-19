@@ -1,158 +1,69 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import TalentCard, { TalentData } from "@/components/talent-card";
-import { Search, Filter } from "lucide-react";
+import TalentCard from "@/components/talent-card";
+import { Search, SlidersHorizontal } from "lucide-react";
+import {
+  talentRoster,
+  Gender,
+  ActivityCategory,
+  categoryInfo,
+  genderInfo,
+} from "@/lib/talent-data";
 
-const categories = [
-  "All",
-  "Lifestyle",
-  "Tech",
-  "Fashion & Beauty",
-  "Fitness",
-  "Entertainment",
-  "Gaming",
-  "Food & Travel",
+const activityFilters: { value: ActivityCategory | "all"; label: string }[] = [
+  { value: "all", label: "All Activities" },
+  { value: "acting", label: "Acting" },
+  { value: "modeling", label: "Modeling" },
+  { value: "music", label: "Music" },
 ];
 
-const talentRoster: TalentData[] = [
-  {
-    id: "1",
-    name: "Maya Johnson",
-    category: "Lifestyle",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop",
-    followers: "2.5M",
-    bio: "Lifestyle creator sharing authentic moments and inspiring daily content.",
-    tags: ["Lifestyle", "Wellness", "Travel"],
-    socials: { instagram: "#", twitter: "#", youtube: "#" },
-  },
-  {
-    id: "2",
-    name: "Marcus Chen",
-    category: "Tech",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop",
-    followers: "1.8M",
-    bio: "Tech enthusiast breaking down the latest innovations for everyone.",
-    tags: ["Tech", "Reviews", "Innovation"],
-    socials: { instagram: "#", twitter: "#" },
-  },
-  {
-    id: "3",
-    name: "Aria Williams",
-    category: "Fashion & Beauty",
-    image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=800&fit=crop",
-    followers: "3.2M",
-    bio: "Fashion forward creator setting trends and inspiring confidence.",
-    tags: ["Fashion", "Beauty", "Style"],
-    socials: { instagram: "#", youtube: "#" },
-  },
-  {
-    id: "4",
-    name: "Jordan Davis",
-    category: "Fitness",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=800&fit=crop",
-    followers: "1.5M",
-    bio: "Fitness coach helping millions achieve their health goals.",
-    tags: ["Fitness", "Wellness", "Motivation"],
-    socials: { instagram: "#", twitter: "#", youtube: "#" },
-  },
-  {
-    id: "5",
-    name: "Zoe Martinez",
-    category: "Entertainment",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop",
-    followers: "4.1M",
-    bio: "Entertainer bringing joy and laughter to audiences worldwide.",
-    tags: ["Comedy", "Entertainment", "Vlogs"],
-    socials: { instagram: "#", twitter: "#", youtube: "#", tiktok: "#" },
-  },
-  {
-    id: "6",
-    name: "Tyler Brooks",
-    category: "Gaming",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=800&fit=crop",
-    followers: "2.8M",
-    bio: "Pro gamer and streamer with a passion for competitive gaming.",
-    tags: ["Gaming", "Esports", "Streaming"],
-    socials: { twitter: "#", youtube: "#", tiktok: "#" },
-  },
-  {
-    id: "7",
-    name: "Sophia Lee",
-    category: "Food & Travel",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=800&fit=crop",
-    followers: "1.9M",
-    bio: "Culinary explorer discovering flavors from around the world.",
-    tags: ["Food", "Travel", "Culture"],
-    socials: { instagram: "#", youtube: "#" },
-  },
-  {
-    id: "8",
-    name: "David Kim",
-    category: "Tech",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=800&fit=crop",
-    followers: "1.2M",
-    bio: "Software engineer turned content creator, demystifying code.",
-    tags: ["Tech", "Coding", "Education"],
-    socials: { instagram: "#", twitter: "#", youtube: "#" },
-  },
-  {
-    id: "9",
-    name: "Emma Thompson",
-    category: "Lifestyle",
-    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=800&fit=crop",
-    followers: "2.1M",
-    bio: "Sharing the art of mindful living and sustainable choices.",
-    tags: ["Lifestyle", "Sustainability", "Mindfulness"],
-    socials: { instagram: "#", youtube: "#" },
-  },
-  {
-    id: "10",
-    name: "Chris Anderson",
-    category: "Fitness",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=800&fit=crop",
-    followers: "980K",
-    bio: "Personal trainer specializing in transformation journeys.",
-    tags: ["Fitness", "Training", "Nutrition"],
-    socials: { instagram: "#", twitter: "#" },
-  },
-  {
-    id: "11",
-    name: "Nina Patel",
-    category: "Fashion & Beauty",
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&h=800&fit=crop",
-    followers: "1.6M",
-    bio: "Beauty guru with a focus on inclusive and diverse beauty standards.",
-    tags: ["Beauty", "Skincare", "Makeup"],
-    socials: { instagram: "#", youtube: "#", tiktok: "#" },
-  },
-  {
-    id: "12",
-    name: "Alex Rivera",
-    category: "Entertainment",
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&h=800&fit=crop",
-    followers: "3.5M",
-    bio: "Multi-talented creator blending music, comedy, and storytelling.",
-    tags: ["Music", "Comedy", "Storytelling"],
-    socials: { instagram: "#", twitter: "#", youtube: "#" },
-  },
+const genderFilters: { value: Gender | "all"; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "male", label: "Male" },
+  { value: "female", label: "Female" },
+  { value: "non-binary", label: "Non-Binary" },
 ];
 
 export default function TalentPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedActivity, setSelectedActivity] = useState<ActivityCategory | "all">("all");
+  const [selectedGender, setSelectedGender] = useState<Gender | "all">("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredTalent = talentRoster.filter((talent) => {
-    const matchesCategory =
-      selectedCategory === "All" || talent.category === selectedCategory;
-    const matchesSearch =
-      talent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      talent.tags.some((tag) =>
-        tag.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    return matchesCategory && matchesSearch;
-  });
+  const filteredTalent = useMemo(() => {
+    return talentRoster.filter((talent) => {
+      if (!talent.active) return false;
+
+      // Activity filter
+      const matchesActivity =
+        selectedActivity === "all" || talent.categories.includes(selectedActivity);
+
+      // Gender filter
+      const matchesGender =
+        selectedGender === "all" || talent.gender === selectedGender;
+
+      // Search filter
+      const matchesSearch =
+        searchQuery === "" ||
+        talent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        talent.categories.some((cat) =>
+          categoryInfo[cat].label.toLowerCase().includes(searchQuery.toLowerCase())
+        ) ||
+        talent.shortBio.toLowerCase().includes(searchQuery.toLowerCase());
+
+      return matchesActivity && matchesGender && matchesSearch;
+    });
+  }, [selectedActivity, selectedGender, searchQuery]);
+
+  const clearFilters = () => {
+    setSelectedActivity("all");
+    setSelectedGender("all");
+    setSearchQuery("");
+  };
+
+  const hasActiveFilters =
+    selectedActivity !== "all" || selectedGender !== "all" || searchQuery !== "";
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] pt-24">
@@ -175,8 +86,8 @@ export default function TalentPage() {
               Meet Our <span className="text-gradient">Talent</span>
             </h1>
             <p className="text-lg text-[#a3a3a3]">
-              Discover our diverse roster of creators and influencers who are
-              shaping culture and driving engagement across platforms.
+              Discover our diverse roster of actors, models, and musicians who are
+              shaping culture and creating unforgettable moments.
             </p>
           </motion.div>
         </div>
@@ -189,39 +100,95 @@ export default function TalentPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col lg:flex-row gap-6 items-center justify-between"
+            className="space-y-6"
           >
             {/* Search Bar */}
-            <div className="relative w-full lg:w-96">
-              <Search
-                size={18}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-[#a3a3a3]"
-              />
-              <input
-                type="text"
-                placeholder="Search talent..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-[#111111] border border-[#262626] rounded-lg text-[#f5f5f5] placeholder-[#a3a3a3] focus:border-[#d4a853] focus:outline-none transition-colors duration-300"
-              />
+            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+              <div className="relative w-full lg:w-96">
+                <Search
+                  size={18}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-[#a3a3a3]"
+                />
+                <input
+                  type="text"
+                  placeholder="Search by name or category..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 bg-[#111111] border border-[#262626] rounded-lg text-[#f5f5f5] placeholder-[#a3a3a3] focus:border-[#d4a853] focus:outline-none transition-colors duration-300"
+                />
+              </div>
+
+              {/* Results Count */}
+              <div className="text-[#a3a3a3] text-sm">
+                Showing <span className="text-[#d4a853]">{filteredTalent.length}</span> talent
+                {filteredTalent.length !== 1 ? "s" : ""}
+              </div>
             </div>
 
-            {/* Category Filters */}
-            <div className="flex flex-wrap gap-2 justify-center lg:justify-end">
-              <Filter size={18} className="text-[#a3a3a3] mr-2 hidden lg:block self-center" />
-              {categories.map((category) => (
+            {/* Filter Controls */}
+            <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between p-6 bg-[#111111] rounded-xl border border-[#262626]">
+              <div className="flex items-center gap-3">
+                <SlidersHorizontal size={18} className="text-[#d4a853]" />
+                <span className="text-sm uppercase tracking-wider text-[#a3a3a3]">
+                  Filters
+                </span>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-6 w-full md:w-auto">
+                {/* Activity Filter */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs uppercase tracking-wider text-[#a3a3a3]">
+                    Activity
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {activityFilters.map((filter) => (
+                      <button
+                        key={filter.value}
+                        onClick={() => setSelectedActivity(filter.value)}
+                        className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${
+                          selectedActivity === filter.value
+                            ? "bg-[#d4a853] text-[#0a0a0a]"
+                            : "bg-[#0a0a0a] text-[#a3a3a3] border border-[#262626] hover:border-[#d4a853] hover:text-[#d4a853]"
+                        }`}
+                      >
+                        {filter.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Gender Filter */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs uppercase tracking-wider text-[#a3a3a3]">
+                    Gender
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {genderFilters.map((filter) => (
+                      <button
+                        key={filter.value}
+                        onClick={() => setSelectedGender(filter.value)}
+                        className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${
+                          selectedGender === filter.value
+                            ? "bg-[#d4a853] text-[#0a0a0a]"
+                            : "bg-[#0a0a0a] text-[#a3a3a3] border border-[#262626] hover:border-[#d4a853] hover:text-[#d4a853]"
+                        }`}
+                      >
+                        {filter.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Clear Filters */}
+              {hasActiveFilters && (
                 <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${
-                    selectedCategory === category
-                      ? "bg-[#d4a853] text-[#0a0a0a]"
-                      : "bg-[#111111] text-[#a3a3a3] border border-[#262626] hover:border-[#d4a853] hover:text-[#d4a853]"
-                  }`}
+                  onClick={clearFilters}
+                  className="text-sm text-[#d4a853] hover:text-[#e8c87a] transition-colors duration-300 underline underline-offset-4"
                 >
-                  {category}
+                  Clear All
                 </button>
-              ))}
+              )}
             </div>
           </motion.div>
         </div>
@@ -242,17 +209,14 @@ export default function TalentPage() {
               animate={{ opacity: 1 }}
               className="text-center py-20"
             >
-              <p className="text-[#a3a3a3] text-lg">
+              <p className="text-[#a3a3a3] text-lg mb-4">
                 No talent found matching your criteria.
               </p>
               <button
-                onClick={() => {
-                  setSelectedCategory("All");
-                  setSearchQuery("");
-                }}
-                className="mt-4 text-[#d4a853] hover:text-[#e8c87a] transition-colors duration-300"
+                onClick={clearFilters}
+                className="text-[#d4a853] hover:text-[#e8c87a] transition-colors duration-300"
               >
-                Clear filters
+                Clear all filters
               </button>
             </motion.div>
           )}
@@ -276,8 +240,9 @@ export default function TalentPage() {
               Want to Join Our Roster?
             </h2>
             <p className="text-[#a3a3a3] mb-8">
-              We&apos;re always looking for talented creators to join our family.
-              If you think you have what it takes, we&apos;d love to hear from you.
+              We&apos;re always looking for talented individuals in acting, modeling,
+              and music to join our family. If you think you have what it takes,
+              we&apos;d love to hear from you.
             </p>
             <a href="/join" className="btn-primary inline-block">
               Apply Now
