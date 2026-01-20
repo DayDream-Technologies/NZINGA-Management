@@ -56,7 +56,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#0a0a0a] border-t border-[#d4a853]/20">
-      <div className="container-custom py-16 md:py-20">
+      <div className="container-custom py-24 md:py-32">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
           {/* Brand & Copyright */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
