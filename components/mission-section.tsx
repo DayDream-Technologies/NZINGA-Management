@@ -41,6 +41,11 @@ export default function MissionSection() {
       ref={containerRef}
       className="section-padding bg-[#0a0a0a] relative overflow-hidden"
     >
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        <div className="animated-gradient-orb animated-gradient-orb-2" style={{ top: '20%', right: '-10%' }} />
+      </div>
+
       {/* Parallax Background Element */}
       <motion.div
         style={{ y }}
@@ -104,7 +109,7 @@ export default function MissionSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="p-6 bg-[#111111] rounded-lg border border-[#262626] hover:border-[#d4a853]/50 transition-colors duration-500 group"
+                className="p-6 bg-[#111111] rounded-lg border border-[#262626] hover:border-[#d4a853]/50 transition-colors duration-500 group glow-pulse"
               >
                 <div className="w-12 h-12 rounded-lg bg-[#1a1a1a] flex items-center justify-center mb-4 group-hover:bg-[#d4a853]/10 transition-colors duration-500">
                   <value.icon

@@ -2,33 +2,31 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Elements */}
+      {/* Animated Background */}
       <div className="absolute inset-0 bg-[#0a0a0a]">
+        {/* Animated Gradient Orbs */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="animated-gradient-orb animated-gradient-orb-1" />
+          <div className="animated-gradient-orb animated-gradient-orb-2" />
+          <div className="animated-gradient-orb animated-gradient-orb-3" />
+        </div>
+        
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-[#0a0a0a] z-10" />
         
         {/* Animated Grid Pattern */}
         <div 
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-[0.15] animated-grid"
           style={{
             backgroundImage: `
               linear-gradient(rgba(212, 168, 83, 0.1) 1px, transparent 1px),
               linear-gradient(90deg, rgba(212, 168, 83, 0.1) 1px, transparent 1px)
             `,
             backgroundSize: '100px 100px',
-          }}
-        />
-        
-        {/* Radial Glow */}
-        <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-30"
-          style={{
-            background: 'radial-gradient(circle, rgba(212, 168, 83, 0.15) 0%, transparent 70%)',
           }}
         />
       </div>
@@ -80,23 +78,6 @@ export default function Hero() {
           <Link href="/join" className="btn-secondary">
             Join Today
           </Link>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-2 text-[#a3a3a3]"
-          >
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
-            <ArrowDown size={20} />
-          </motion.div>
         </motion.div>
       </div>
 

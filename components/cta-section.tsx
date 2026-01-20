@@ -15,22 +15,15 @@ const brandLogos = [
 export default function CTASection() {
   return (
     <section className="section-padding bg-[#111111] relative overflow-hidden">
-      {/* Background Elements */}
+      {/* Animated Background */}
       <div className="absolute inset-0">
         {/* Gradient Orbs */}
-        <div
-          className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-3xl"
-          style={{
-            background: "radial-gradient(circle, #d4a853 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-15 blur-3xl"
-          style={{
-            background: "radial-gradient(circle, #d4a853 0%, transparent 70%)",
-          }}
-        />
+        <div className="animated-gradient-orb animated-gradient-orb-1" style={{ top: '-20%', left: '10%' }} />
+        <div className="animated-gradient-orb animated-gradient-orb-2" style={{ bottom: '-20%', right: '10%' }} />
       </div>
+      
+      {/* Ambient glow */}
+      <div className="absolute inset-0 bg-ambient" />
 
       <div className="container-custom relative z-10">
         <motion.div
@@ -46,7 +39,7 @@ export default function CTASection() {
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="w-16 h-16 rounded-full bg-[#d4a853]/10 flex items-center justify-center mx-auto mb-8"
+            className="w-16 h-16 rounded-full bg-[#d4a853]/10 flex items-center justify-center mx-auto mb-8 glow-pulse"
           >
             <Sparkles className="text-[#d4a853]" size={28} />
           </motion.div>

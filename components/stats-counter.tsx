@@ -52,7 +52,10 @@ function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
 
 export default function StatsCounter() {
   return (
-    <section className="section-padding bg-[#111111] relative overflow-hidden">
+    <section className="section-padding bg-[#111111] relative overflow-hidden section-glow">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-ambient" />
+      
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
