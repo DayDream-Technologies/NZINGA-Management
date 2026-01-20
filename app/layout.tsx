@@ -3,6 +3,7 @@ import { Playfair_Display, Manrope } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
+import ParticleBackground from "@/components/particle-background";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -52,8 +53,9 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${manrope.variable} antialiased bg-[#0a0a0a] text-[#f5f5f5]`}
       >
+        <ParticleBackground particleCount={60} speed={0.2} />
         <Navigation />
-        <main>{children}</main>
+        <main className="relative z-10">{children}</main>
         <Footer />
       </body>
     </html>
