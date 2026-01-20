@@ -118,10 +118,23 @@ export default function TalentPage() {
                 />
               </div>
 
-              {/* Results Count */}
-              <div className="text-[#a3a3a3] text-sm">
-                Showing <span className="text-[#d4a853]">{filteredTalent.length}</span> talent
-                {filteredTalent.length !== 1 ? "s" : ""}
+              {/* Results Count & Clear Filters */}
+              <div className="flex items-center gap-4 text-sm">
+                <span className="text-[#a3a3a3]">
+                  Showing <span className="text-[#d4a853]">{filteredTalent.length}</span> result
+                  {filteredTalent.length !== 1 ? "s" : ""}
+                </span>
+                {hasActiveFilters && (
+                  <>
+                    <span className="text-[#262626]">|</span>
+                    <button
+                      onClick={clearFilters}
+                      className="text-[#d4a853] hover:text-[#e8c87a] transition-colors duration-300 underline underline-offset-4"
+                    >
+                      Clear Filters
+                    </button>
+                  </>
+                )}
               </div>
             </div>
 
@@ -179,16 +192,6 @@ export default function TalentPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Clear Filters */}
-              {hasActiveFilters && (
-                <button
-                  onClick={clearFilters}
-                  className="text-sm text-[#d4a853] hover:text-[#e8c87a] transition-colors duration-300 underline underline-offset-4"
-                >
-                  Clear All
-                </button>
-              )}
             </div>
           </motion.div>
         </div>
