@@ -128,7 +128,7 @@ export default function Footer() {
       <div className="border-t border-[#262626]">
         <div className="container-custom py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-[#a3a3a3]">
-            © {currentYear} NZINGA Management. All Rights Reserved.
+            © 2020–{currentYear} NZINGA Management. All Rights Reserved.
           </p>
           <div className="flex gap-6">
             {footerLinks.legal.map((link) => (
