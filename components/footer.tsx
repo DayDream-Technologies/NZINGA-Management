@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Instagram, Youtube } from "lucide-react";
 import XIcon from "@/components/icons/x-icon";
@@ -19,6 +18,39 @@ const socialLinks = [
   { href: "https://tiktok.com/@nzingamgmt", icon: Youtube, label: "TikTok" },
 ];
 
+// Logo component with inline SVG to avoid path issues
+function Logo({ size = 32 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="48" height="48" rx="8" fill="#0a0a0a" />
+      <path
+        d="M12 36V12H17.5L30.5 28.5V12H36V36H30.5L17.5 19.5V36H12Z"
+        fill="url(#footer-gold-gradient)"
+      />
+      <defs>
+        <linearGradient
+          id="footer-gold-gradient"
+          x1="12"
+          y1="12"
+          x2="36"
+          y2="36"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#d4a853" />
+          <stop offset="0.5" stopColor="#f0d78c" />
+          <stop offset="1" stopColor="#d4a853" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -29,13 +61,7 @@ export default function Footer() {
           {/* Brand & Copyright */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
             <Link href="/" className="flex items-center gap-2">
-              <Image
-                src="/logo.svg"
-                alt="NZINGA"
-                width={32}
-                height={32}
-                className="w-8 h-8"
-              />
+              <Logo size={32} />
               <span
                 className="text-lg font-medium tracking-wide text-[#f5f5f5]"
                 style={{ fontFamily: "var(--font-playfair)" }}

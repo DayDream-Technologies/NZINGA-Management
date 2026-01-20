@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -11,6 +10,39 @@ const navLinks = [
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ];
+
+// Logo component with inline SVG to avoid path issues
+function Logo({ size = 40 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="48" height="48" rx="8" fill="#0a0a0a" />
+      <path
+        d="M12 36V12H17.5L30.5 28.5V12H36V36H30.5L17.5 19.5V36H12Z"
+        fill="url(#nav-gold-gradient)"
+      />
+      <defs>
+        <linearGradient
+          id="nav-gold-gradient"
+          x1="12"
+          y1="12"
+          x2="36"
+          y2="36"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#d4a853" />
+          <stop offset="0.5" stopColor="#f0d78c" />
+          <stop offset="1" stopColor="#d4a853" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -45,13 +77,7 @@ export default function Navigation() {
                 whileHover={{ scale: 1.02 }}
                 className="flex items-center gap-3"
               >
-                <Image
-                  src="/logo.svg"
-                  alt="NZINGA"
-                  width={40}
-                  height={40}
-                  className="w-10 h-10"
-                />
+                <Logo size={40} />
                 <span
                   className="text-xl md:text-2xl font-medium tracking-wide text-[#f5f5f5]"
                   style={{ fontFamily: "var(--font-playfair)" }}
