@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Instagram, Youtube, MapPin } from "lucide-react";
+import { Instagram, Youtube } from "lucide-react";
 import XIcon from "@/components/icons/x-icon";
 
 const footerLinks = [
@@ -27,12 +28,19 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
           {/* Brand & Copyright */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-            <Link href="/">
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/logo.svg"
+                alt="NZINGA"
+                width={32}
+                height={32}
+                className="w-8 h-8"
+              />
               <span
-                className="text-2xl font-bold tracking-wider text-gradient"
+                className="text-lg font-medium tracking-wide text-[#f5f5f5]"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
-                NZINGA
+                Management
               </span>
             </Link>
             <span className="hidden sm:block text-[#262626]">|</span>

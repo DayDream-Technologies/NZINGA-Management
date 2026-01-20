@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -39,14 +40,25 @@ export default function Navigation() {
         <nav className="container-custom">
           <div className="flex items-center justify-between h-20 md:h-24">
             {/* Logo */}
-            <Link href="/" className="relative z-10">
-              <motion.span
-                className="text-2xl md:text-3xl font-bold tracking-wider"
-                style={{ fontFamily: "var(--font-playfair)" }}
+            <Link href="/" className="relative z-10 flex items-center gap-3">
+              <motion.div
                 whileHover={{ scale: 1.02 }}
+                className="flex items-center gap-3"
               >
-                <span className="text-gradient">NZINGA</span>
-              </motion.span>
+                <Image
+                  src="/logo.svg"
+                  alt="NZINGA"
+                  width={40}
+                  height={40}
+                  className="w-10 h-10"
+                />
+                <span
+                  className="text-xl md:text-2xl font-medium tracking-wide text-[#f5f5f5]"
+                  style={{ fontFamily: "var(--font-playfair)" }}
+                >
+                  Management
+                </span>
+              </motion.div>
             </Link>
 
             {/* Desktop Navigation */}
