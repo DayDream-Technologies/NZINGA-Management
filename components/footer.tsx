@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Instagram, Twitter, Youtube, Mail, MapPin, Phone } from "lucide-react";
+import { Instagram, Youtube, MapPin } from "lucide-react";
+import XIcon from "@/components/icons/x-icon";
 
 const footerLinks = {
   navigation: [
-    { href: "/", label: "Home" },
     { href: "/talent", label: "Talent" },
     { href: "/about", label: "About Us" },
     { href: "/contact", label: "Contact" },
@@ -20,7 +20,7 @@ const footerLinks = {
 
 const socialLinks = [
   { href: "https://instagram.com/nzingamgmt", icon: Instagram, label: "Instagram" },
-  { href: "https://twitter.com/nzingamgmt", icon: Twitter, label: "Twitter" },
+  { href: "https://x.com/nzingamgmt", icon: XIcon, label: "X", isCustom: true },
   { href: "https://tiktok.com/@nzingamgmt", icon: Youtube, label: "TikTok" },
 ];
 
@@ -60,7 +60,11 @@ export default function Footer() {
                   className="w-11 h-11 rounded-full border border-[#262626] flex items-center justify-center text-[#a3a3a3] hover:border-[#d4a853] hover:text-[#d4a853] transition-colors duration-300"
                   aria-label={social.label}
                 >
-                  <social.icon size={18} />
+                  {social.isCustom ? (
+                    <social.icon size={18} />
+                  ) : (
+                    <social.icon size={18} />
+                  )}
                 </motion.a>
               ))}
             </div>
@@ -85,41 +89,21 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Locations */}
           <div>
             <h4 className="text-sm uppercase tracking-widest text-[#d4a853] mb-6">
-              Contact
+              Locations
             </h4>
-            <ul className="space-y-4">
-              <li>
-                <a
-                  href="mailto:info@nzingamgmt.com"
-                  className="flex items-center gap-3 text-[#a3a3a3] hover:text-[#f5f5f5] transition-colors duration-300"
-                >
-                  <Mail size={16} className="text-[#d4a853]" />
-                  info@nzingamgmt.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+1234567890"
-                  className="flex items-center gap-3 text-[#a3a3a3] hover:text-[#f5f5f5] transition-colors duration-300"
-                >
-                  <Phone size={16} className="text-[#d4a853]" />
-                  (123) 456-7890
-                </a>
-              </li>
-              <li className="flex items-start gap-3 text-[#a3a3a3]">
-                <MapPin size={16} className="text-[#d4a853] mt-1 flex-shrink-0" />
-                <span>
-                  Los Angeles, CA
-                  <br />
-                  New York, NY
-                  <br />
-                  Atlanta, GA
-                </span>
-              </li>
-            </ul>
+            <div className="flex items-start gap-3 text-[#a3a3a3]">
+              <MapPin size={16} className="text-[#d4a853] mt-1 flex-shrink-0" />
+              <span>
+                Los Angeles, CA
+                <br />
+                New York, NY
+                <br />
+                Atlanta, GA
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -128,7 +112,7 @@ export default function Footer() {
       <div className="border-t border-[#262626]">
         <div className="container-custom py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-[#a3a3a3]">
-            © 2020–{currentYear} NZINGA Management. All Rights Reserved.
+            © {currentYear} NZINGA Management. All Rights Reserved.
           </p>
           <div className="flex gap-6">
             {footerLinks.legal.map((link) => (

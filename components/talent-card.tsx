@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Instagram, Twitter, Youtube, Music } from "lucide-react";
+import { Instagram, Youtube, Music } from "lucide-react";
+import XIcon from "@/components/icons/x-icon";
 import { TalentPerson, calculateAge, categoryInfo } from "@/lib/talent-data";
 
 interface TalentCardProps {
@@ -96,9 +97,9 @@ export default function TalentCard({ talent, index }: TalentCardProps) {
               {talent.socials.twitter && (
                 <span
                   className="w-8 h-8 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#a3a3a3] group-hover:bg-[#262626]"
-                  aria-label="Twitter"
+                  aria-label="X"
                 >
-                  <Twitter size={14} />
+                  <XIcon size={14} />
                 </span>
               )}
               <span className="ml-auto text-xs text-[#d4a853] uppercase tracking-wider self-center">

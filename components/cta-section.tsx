@@ -4,6 +4,14 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 
+const brandLogos = [
+  { name: "Nike", logo: "NIKE" },
+  { name: "Adidas", logo: "ADIDAS" },
+  { name: "Apple", logo: "APPLE" },
+  { name: "Samsung", logo: "SAMSUNG" },
+  { name: "Amazon", logo: "AMAZON" },
+];
+
 export default function CTASection() {
   return (
     <section className="section-padding bg-[#111111] relative overflow-hidden">
@@ -73,7 +81,7 @@ export default function CTASection() {
             </motion.div>
           </div>
 
-          {/* Trust Indicators */}
+          {/* Brand Partners */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -81,26 +89,27 @@ export default function CTASection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-16 pt-10 border-t border-[#262626]"
           >
-            <p className="text-sm text-[#a3a3a3] mb-6 uppercase tracking-wider">
+            <p className="text-sm text-[#a3a3a3] mb-8 uppercase tracking-wider">
               Trusted by Leading Brands
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-50">
-              {/* Placeholder brand logos - in production, these would be actual brand images */}
-              {["Brand 1", "Brand 2", "Brand 3", "Brand 4", "Brand 5"].map(
-                (brand, index) => (
-                  <motion.div
-                    key={brand}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                    className="text-lg font-semibold text-[#a3a3a3] tracking-wider"
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+              {brandLogos.map((brand, index) => (
+                <motion.div
+                  key={brand.name}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                  className="px-6 py-3 bg-[#0a0a0a]/50 rounded-lg border border-[#262626] hover:border-[#d4a853]/30 transition-colors duration-300"
+                >
+                  <span
+                    className="text-lg font-bold tracking-[0.2em] text-[#a3a3a3] hover:text-[#f5f5f5] transition-colors duration-300"
                     style={{ fontFamily: "var(--font-playfair)" }}
                   >
-                    {brand}
-                  </motion.div>
-                )
-              )}
+                    {brand.logo}
+                  </span>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </motion.div>

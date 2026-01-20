@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   Instagram,
-  Twitter,
   Youtube,
   Music,
   Globe,
@@ -17,6 +16,7 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
+import XIcon from "@/components/icons/x-icon";
 import { TalentPerson, calculateAge, categoryInfo } from "@/lib/talent-data";
 
 interface TalentDetailClientProps {
@@ -50,7 +50,7 @@ export default function TalentDetailClient({ talent }: TalentDetailClientProps) 
     { key: "instagram", icon: Instagram, url: talent.socials.instagram, label: "Instagram" },
     { key: "tiktok", icon: Music, url: talent.socials.tiktok, label: "TikTok" },
     { key: "youtube", icon: Youtube, url: talent.socials.youtube, label: "YouTube" },
-    { key: "twitter", icon: Twitter, url: talent.socials.twitter, label: "Twitter" },
+    { key: "twitter", icon: XIcon, url: talent.socials.twitter, label: "X" },
     { key: "spotify", icon: Music, url: talent.socials.spotify, label: "Spotify" },
     { key: "website", icon: Globe, url: talent.socials.website, label: "Website" },
   ].filter((link) => link.url);

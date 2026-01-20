@@ -3,30 +3,16 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Mail,
-  Phone,
   MapPin,
   Send,
   Instagram,
-  Twitter,
   Youtube,
   Clock,
   CheckCircle,
 } from "lucide-react";
+import XIcon from "@/components/icons/x-icon";
 
 const contactInfo = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "info@nzingamgmt.com",
-    href: "mailto:info@nzingamgmt.com",
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "(123) 456-7890",
-    href: "tel:+1234567890",
-  },
   {
     icon: Clock,
     label: "Hours",
@@ -55,7 +41,7 @@ const offices = [
 
 const socialLinks = [
   { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: XIcon, href: "#", label: "X" },
   { icon: Youtube, href: "#", label: "TikTok" },
 ];
 
@@ -338,16 +324,7 @@ export default function ContactPage() {
                         <p className="text-sm text-[#a3a3a3] mb-1">
                           {item.label}
                         </p>
-                        {item.href ? (
-                          <a
-                            href={item.href}
-                            className="text-[#f5f5f5] hover:text-[#d4a853] transition-colors duration-300"
-                          >
-                            {item.value}
-                          </a>
-                        ) : (
-                          <p className="text-[#f5f5f5]">{item.value}</p>
-                        )}
+                        <p className="text-[#f5f5f5]">{item.value}</p>
                       </div>
                     </div>
                   ))}

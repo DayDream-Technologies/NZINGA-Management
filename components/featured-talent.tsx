@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Instagram, Twitter, Youtube, Music } from "lucide-react";
+import { Instagram, Youtube, Music } from "lucide-react";
+import XIcon from "@/components/icons/x-icon";
 import { talentRoster, categoryInfo, calculateAge } from "@/lib/talent-data";
 
 // Get featured talent
@@ -116,9 +117,9 @@ export default function FeaturedTalent() {
                       {talent.socials.twitter && (
                         <span
                           className="w-9 h-9 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#a3a3a3]"
-                          aria-label="Twitter"
+                          aria-label="X"
                         >
-                          <Twitter size={16} />
+                          <XIcon size={16} />
                         </span>
                       )}
                     </div>
