@@ -57,15 +57,18 @@ export default function StatsCounter() {
       <div className="absolute inset-0 bg-ambient" />
       
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-10">
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, #d4a853 1px, transparent 0)`,
-            backgroundSize: "40px 40px",
+            backgroundSize: "50px 50px",
           }}
         />
       </div>
+      
+      {/* Top gold line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#d4a853]/40 to-transparent" />
 
       <div className="container-custom relative z-10">
         <motion.div
@@ -82,7 +85,7 @@ export default function StatsCounter() {
             className="heading-lg"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            Our Impact in Numbers
+            Our Impact in <span className="text-gradient">Numbers</span>
           </h2>
         </motion.div>
 
@@ -94,21 +97,30 @@ export default function StatsCounter() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="text-center p-6 lg:p-8"
+              className="text-center p-6 lg:p-8 relative group"
             >
+              {/* Hover glow effect */}
+              <div className="absolute inset-0 rounded-lg bg-[#d4a853]/0 group-hover:bg-[#d4a853]/5 transition-colors duration-500" />
+              
               <div
-                className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 relative"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 <AnimatedNumber value={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="text-[#a3a3a3] text-sm md:text-base uppercase tracking-wider">
+              <p className="text-[#a3a3a3] text-sm md:text-base uppercase tracking-wider relative">
                 {stat.label}
               </p>
+              
+              {/* Bottom accent line */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-[#d4a853] group-hover:w-16 transition-all duration-500" />
             </motion.div>
           ))}
         </div>
       </div>
+      
+      {/* Bottom gold line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#d4a853]/40 to-transparent" />
     </section>
   );
 }

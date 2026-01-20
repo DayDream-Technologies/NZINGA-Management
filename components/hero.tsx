@@ -15,18 +15,26 @@ export default function Hero() {
           <div className="animated-gradient-orb animated-gradient-orb-3" />
         </div>
         
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-[#0a0a0a] z-10" />
+        {/* Top and Bottom Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-[#0a0a0a] z-10 opacity-60" />
         
         {/* Animated Grid Pattern */}
         <div 
-          className="absolute inset-0 opacity-[0.15] animated-grid"
+          className="absolute inset-0 animated-grid"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(212, 168, 83, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(212, 168, 83, 0.1) 1px, transparent 1px)
+              linear-gradient(rgba(212, 168, 83, 0.15) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(212, 168, 83, 0.15) 1px, transparent 1px)
             `,
-            backgroundSize: '100px 100px',
+            backgroundSize: '80px 80px',
+          }}
+        />
+        
+        {/* Gold vignette effect */}
+        <div 
+          className="absolute inset-0 z-10"
+          style={{
+            background: 'radial-gradient(ellipse at center, transparent 0%, rgba(10, 10, 10, 0.4) 70%, rgba(10, 10, 10, 0.8) 100%)',
           }}
         />
       </div>
@@ -38,7 +46,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <span className="inline-block text-sm uppercase tracking-[0.3em] text-[#d4a853] mb-6">
+          <span className="inline-block text-sm uppercase tracking-[0.3em] text-[#d4a853] mb-6 px-4 py-2 border border-[#d4a853]/30 rounded-full">
             Premier Talent Management
           </span>
         </motion.div>
@@ -79,11 +87,25 @@ export default function Hero() {
             Join Today
           </Link>
         </motion.div>
+        
+        {/* Gold accent line */}
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="mt-16 mx-auto w-32 gold-line"
+        />
       </div>
 
-      {/* Decorative Lines */}
-      <div className="absolute left-8 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-[#d4a853]/30 to-transparent hidden lg:block" />
-      <div className="absolute right-8 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-[#d4a853]/30 to-transparent hidden lg:block" />
+      {/* Decorative Gold Lines */}
+      <div className="absolute left-8 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-[#d4a853]/40 to-transparent hidden lg:block" />
+      <div className="absolute right-8 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-[#d4a853]/40 to-transparent hidden lg:block" />
+      
+      {/* Corner accents */}
+      <div className="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-[#d4a853]/30 hidden lg:block" />
+      <div className="absolute top-8 right-8 w-16 h-16 border-r-2 border-t-2 border-[#d4a853]/30 hidden lg:block" />
+      <div className="absolute bottom-8 left-8 w-16 h-16 border-l-2 border-b-2 border-[#d4a853]/30 hidden lg:block" />
+      <div className="absolute bottom-8 right-8 w-16 h-16 border-r-2 border-b-2 border-[#d4a853]/30 hidden lg:block" />
     </section>
   );
 }
