@@ -15,17 +15,36 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
+  Play,
+  Users,
+  Heart,
+  CreditCard,
 } from "lucide-react";
 import XIcon from "@/components/icons/x-icon";
-import { TalentPerson, calculateAge, categoryInfo } from "@/lib/talent-data";
+import { TalentPerson, calculateAge, categoryInfo, PortfolioItem } from "@/lib/talent-data";
 
 interface TalentDetailClientProps {
   talent: TalentPerson;
 }
 
+// Generate consistent fake metrics based on talent ID
+function generateMetrics(talentId: string) {
+  const seed = parseInt(talentId) || 1;
+  const videoViews = Math.floor((seed * 127 + 350) % 900 + 100); // 100K - 999K
+  const followers = Math.floor((seed * 89 + 15) % 85 + 15); // 15K - 99K  
+  const likes = Math.floor((seed * 213 + 800) % 1400 + 600); // 600K - 2M
+  
+  return {
+    videoViews: videoViews >= 1000 ? `${(videoViews / 1000).toFixed(1)}M` : `${videoViews}K`,
+    followers: followers >= 100 ? `${(followers / 10).toFixed(1)}M` : `${followers}.${(seed % 10)}K`,
+    likes: likes >= 1000 ? `${(likes / 1000).toFixed(1)}M` : `${likes}K`,
+  };
+}
+
 export default function TalentDetailClient({ talent }: TalentDetailClientProps) {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const age = calculateAge(talent.birthDate);
+  const metrics = generateMetrics(talent.id);
 
   const openLightbox = (index: number) => setSelectedPhotoIndex(index);
   const closeLightbox = () => setSelectedPhotoIndex(null);
@@ -178,6 +197,31 @@ export default function TalentDetailClient({ talent }: TalentDetailClientProps) 
                 )}
               </div>
 
+              {/* Social Metrics */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="p-4 bg-gradient-to-br from-[#111111] to-[#1a1a1a] rounded-lg border border-[#262626] text-center">
+                  <Play size={20} className="text-[#d4a853] mx-auto mb-2" />
+                  <p className="text-2xl font-bold text-[#f5f5f5]">{metrics.videoViews}</p>
+                  <p className="text-xs text-[#a3a3a3] uppercase tracking-wider mt-1">
+                    Video Views
+                  </p>
+                </div>
+                <div className="p-4 bg-gradient-to-br from-[#111111] to-[#1a1a1a] rounded-lg border border-[#262626] text-center">
+                  <Users size={20} className="text-[#d4a853] mx-auto mb-2" />
+                  <p className="text-2xl font-bold text-[#f5f5f5]">{metrics.followers}</p>
+                  <p className="text-xs text-[#a3a3a3] uppercase tracking-wider mt-1">
+                    Followers
+                  </p>
+                </div>
+                <div className="p-4 bg-gradient-to-br from-[#111111] to-[#1a1a1a] rounded-lg border border-[#262626] text-center">
+                  <Heart size={20} className="text-[#d4a853] mx-auto mb-2" />
+                  <p className="text-2xl font-bold text-[#f5f5f5]">{metrics.likes}</p>
+                  <p className="text-xs text-[#a3a3a3] uppercase tracking-wider mt-1">
+                    Likes
+                  </p>
+                </div>
+              </div>
+
               {/* Bio */}
               <div>
                 <h2
@@ -189,33 +233,42 @@ export default function TalentDetailClient({ talent }: TalentDetailClientProps) 
                 <p className="text-[#a3a3a3] leading-relaxed">{talent.fullBio}</p>
               </div>
 
-              {/* Social Links */}
-              {socialLinks.length > 0 && (
-                <div>
-                  <h2
-                    className="text-xl mb-4"
-                    style={{ fontFamily: "var(--font-playfair)" }}
+              {/* Social Links / Connect */}
+              <div>
+                <h2
+                  className="text-xl mb-4"
+                  style={{ fontFamily: "var(--font-playfair)" }}
+                >
+                  Connect
+                </h2>
+                <div className="flex flex-wrap gap-3">
+                  {socialLinks.map((link) => (
+                    <motion.a
+                      key={link.key}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex items-center gap-2 px-4 py-2.5 bg-[#111111] border border-[#262626] rounded-lg text-[#a3a3a3] hover:border-[#d4a853] hover:text-[#d4a853] transition-colors duration-300"
+                    >
+                      <link.icon size={18} />
+                      <span className="text-sm">{link.label}</span>
+                    </motion.a>
+                  ))}
+                  <motion.a
+                    href="https://cloud-cards.link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 px-4 py-2.5 bg-[#111111] border border-[#262626] rounded-lg text-[#a3a3a3] hover:border-[#d4a853] hover:text-[#d4a853] transition-colors duration-300"
                   >
-                    Connect
-                  </h2>
-                  <div className="flex flex-wrap gap-3">
-                    {socialLinks.map((link) => (
-                      <motion.a
-                        key={link.key}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="flex items-center gap-2 px-4 py-2.5 bg-[#111111] border border-[#262626] rounded-lg text-[#a3a3a3] hover:border-[#d4a853] hover:text-[#d4a853] transition-colors duration-300"
-                      >
-                        <link.icon size={18} />
-                        <span className="text-sm">{link.label}</span>
-                      </motion.a>
-                    ))}
-                  </div>
+                    <CreditCard size={18} />
+                    <span className="text-sm">Cloud Cards</span>
+                  </motion.a>
                 </div>
-              )}
+              </div>
 
               {/* Contact CTA */}
               <div className="pt-6 border-t border-[#262626]">
@@ -230,6 +283,94 @@ export default function TalentDetailClient({ talent }: TalentDetailClientProps) 
           </div>
         </div>
       </section>
+
+      {/* Portfolio & Work Section */}
+      {talent.portfolio && talent.portfolio.length > 0 && (
+        <section className="section-padding pt-0 bg-[#0a0a0a]">
+          <div className="container-custom">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-10"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#262626] to-transparent" />
+                <h2
+                  className="text-2xl md:text-3xl text-center"
+                  style={{ fontFamily: "var(--font-playfair)" }}
+                >
+                  Portfolio & Work
+                </h2>
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#262626] to-transparent" />
+              </div>
+              
+              {/* Notable Work Tags */}
+              {talent.notableWork && talent.notableWork.length > 0 && (
+                <div className="flex flex-wrap justify-center gap-2 mt-4">
+                  {talent.notableWork.map((work, index) => (
+                    <span
+                      key={index}
+                      className="text-xs px-3 py-1.5 bg-[#111111] border border-[#262626] rounded text-[#a3a3a3] uppercase tracking-wider"
+                    >
+                      {work}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+
+            {/* Portfolio Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {talent.portfolio.map((item: PortfolioItem, index: number) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group relative"
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+                    {/* Image */}
+                    <div
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      style={{ backgroundImage: `url(${item.image})` }}
+                    />
+                    
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent opacity-80" />
+                    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-[#d4a853]/0 group-hover:bg-[#d4a853]/10 transition-colors duration-500" />
+                    
+                    {/* Type Badge */}
+                    <div className="absolute top-4 left-4">
+                      <span className="text-[10px] px-2 py-1 bg-[#0a0a0a]/80 backdrop-blur-sm rounded text-[#d4a853] uppercase tracking-wider">
+                        {item.type}
+                      </span>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <p className="text-lg font-semibold mb-1" style={{ fontFamily: "var(--font-playfair)" }}>
+                        {item.title}
+                      </p>
+                      {item.brand && (
+                        <p className="text-sm text-[#d4a853]">{item.brand}</p>
+                      )}
+                    </div>
+                    
+                    {/* Border Effect */}
+                    <div className="absolute inset-0 rounded-lg border border-[#262626] group-hover:border-[#d4a853]/50 transition-colors duration-500" />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Photo Lightbox */}
       <AnimatePresence>

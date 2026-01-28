@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
+import PageHero from "@/components/page-hero";
 import TalentCard from "@/components/talent-card";
 import { Search, SlidersHorizontal } from "lucide-react";
 import {
@@ -66,32 +67,13 @@ export default function TalentPage() {
     selectedActivity !== "all" || selectedGender !== "all" || searchQuery !== "";
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] pt-24">
-      {/* Hero Section */}
-      <section className="section-padding pb-12">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#d4a853] mb-4 block">
-              Our Roster
-            </span>
-            <h1
-              className="heading-xl mb-6"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              Meet Our <span className="text-gradient">Talent</span>
-            </h1>
-            <p className="text-lg text-[#a3a3a3]">
-              Discover our diverse roster of actors, models, and musicians who are
-              shaping culture and creating unforgettable moments.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <div className="min-h-screen bg-[#0a0a0a]">
+      <PageHero
+        label="Our Roster"
+        title={<>Meet Our <span className="text-gradient">Talent</span></>}
+        description="Discover our diverse roster of actors, models, and musicians who are shaping culture and creating unforgettable moments."
+        compact
+      />
 
       {/* Filters Section */}
       <section className="pb-12">
@@ -201,7 +183,7 @@ export default function TalentPage() {
       <section className="section-padding pt-0">
         <div className="container-custom">
           {filteredTalent.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10">
               {filteredTalent.map((talent, index) => (
                 <TalentCard key={talent.id} talent={talent} index={index} />
               ))}

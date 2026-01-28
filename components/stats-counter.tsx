@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 
 interface StatItem {
   value: number;
@@ -14,6 +15,14 @@ const stats: StatItem[] = [
   { value: 15, suffix: "+", label: "Brand Partnerships" },
   { value: 10, suffix: "", label: "Nationwide Offices" },
   { value: 50, suffix: "+", label: "Dedicated Employees" },
+];
+
+const brands = [
+  { name: "Isaiahs Hub", logo: "/brands/isaiahs-hub.png" },
+  { name: "Dubby", logo: "/brands/dubby.png" },
+  { name: "Prime Video", logo: "/brands/prime-video.png" },
+  { name: "Meta", logo: "/brands/meta.png" },
+  { name: "Royale Battlefield", logo: "/brands/royale-battlefield.png" },
 ];
 
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
@@ -117,6 +126,36 @@ export default function StatsCounter() {
             </motion.div>
           ))}
         </div>
+
+        {/* Brand Partners */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-20 pt-12 border-t border-[#262626]"
+        >
+          <p className="text-center text-sm text-[#a3a3a3] uppercase tracking-[0.2em] mb-8">
+            Trusted by leading brands
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-12">
+            {brands.map((brand) => (
+              <div
+                key={brand.name}
+                className="flex items-center justify-center px-6 h-[60px] rounded-lg transition-all duration-300"
+                style={{ background: 'linear-gradient(135deg, #e8e8e8 0%, #c0c0c0 50%, #d8d8d8 100%)' }}
+              >
+                <Image
+                  src={brand.logo}
+                  alt={brand.name}
+                  width={120}
+                  height={40}
+                  className="object-contain h-[40px] w-auto"
+                />
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
       
       {/* Bottom gold line */}

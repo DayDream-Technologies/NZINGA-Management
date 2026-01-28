@@ -26,6 +26,13 @@ export interface TalentSocials {
   website?: string;
 }
 
+export interface PortfolioItem {
+  image: string;
+  title: string;
+  type: "modeling" | "collaboration" | "campaign" | "editorial";
+  brand?: string;
+}
+
 export interface TalentPerson {
   // Basic Info
   id: string;
@@ -56,6 +63,10 @@ export interface TalentPerson {
   // Featured/Active status
   featured: boolean;
   active: boolean;
+  
+  // Portfolio & Work
+  portfolio?: PortfolioItem[];
+  notableWork?: string[];
 }
 
 /**
@@ -138,6 +149,27 @@ export const talentRoster: TalentPerson[] = [
     location: "Los Angeles, CA",
     featured: true,
     active: true,
+    portfolio: [
+      {
+        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&h=1000&fit=crop",
+        title: "Lifestyle Brand Campaign",
+        type: "campaign",
+        brand: "Urban Outfitters"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=1000&fit=crop",
+        title: "Editorial Shoot",
+        type: "editorial",
+        brand: "GQ Style"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=800&h=1000&fit=crop",
+        title: "Streetwear Collection",
+        type: "modeling",
+        brand: "Represent"
+      },
+    ],
+    notableWork: ["Urban Outfitters", "GQ Style", "Represent CLO", "Nike"],
   },
   {
     id: "2",
@@ -165,6 +197,27 @@ export const talentRoster: TalentPerson[] = [
     location: "New York, NY",
     featured: true,
     active: true,
+    portfolio: [
+      {
+        image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&h=1000&fit=crop",
+        title: "Music Video Production",
+        type: "collaboration",
+        brand: "Sony Music"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&h=1000&fit=crop",
+        title: "Fashion Week Runway",
+        type: "modeling",
+        brand: "NYFW"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=800&h=1000&fit=crop",
+        title: "Streetwear Campaign",
+        type: "campaign",
+        brand: "KITH"
+      },
+    ],
+    notableWork: ["Sony Music", "KITH", "NYFW", "Beats by Dre"],
   },
   {
     id: "3",
@@ -191,6 +244,21 @@ export const talentRoster: TalentPerson[] = [
     location: "Atlanta, GA",
     featured: false,
     active: true,
+    portfolio: [
+      {
+        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&h=1000&fit=crop",
+        title: "Film Still - Drama",
+        type: "collaboration",
+        brand: "A24 Films"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?w=800&h=1000&fit=crop",
+        title: "Commercial Spot",
+        type: "campaign",
+        brand: "Lexus"
+      },
+    ],
+    notableWork: ["A24 Films", "Lexus", "HBO Max"],
   },
   {
     id: "4",
@@ -217,6 +285,33 @@ export const talentRoster: TalentPerson[] = [
     location: "Miami, FL",
     featured: true,
     active: true,
+    portfolio: [
+      {
+        image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=1000&fit=crop",
+        title: "Vogue Editorial",
+        type: "editorial",
+        brand: "Vogue"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=1000&fit=crop",
+        title: "Designer Runway",
+        type: "modeling",
+        brand: "Versace"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=800&h=1000&fit=crop",
+        title: "Luxury Campaign",
+        type: "campaign",
+        brand: "Gucci"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800&h=1000&fit=crop",
+        title: "Cover Shoot",
+        type: "editorial",
+        brand: "Elle"
+      },
+    ],
+    notableWork: ["Vogue", "Versace", "Gucci", "Elle Magazine"],
   },
   {
     id: "5",
@@ -245,6 +340,21 @@ export const talentRoster: TalentPerson[] = [
     location: "Chicago, IL",
     featured: false,
     active: true,
+    portfolio: [
+      {
+        image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=1000&fit=crop",
+        title: "Album Cover Art",
+        type: "collaboration",
+        brand: "Atlantic Records"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&h=1000&fit=crop",
+        title: "Live Performance",
+        type: "collaboration",
+        brand: "Coachella"
+      },
+    ],
+    notableWork: ["Atlantic Records", "Coachella", "Apple Music"],
   },
   {
     id: "6",
@@ -255,12 +365,12 @@ export const talentRoster: TalentPerson[] = [
     categories: ["modeling", "acting"],
     shortBio: "Fresh face in modeling with a growing portfolio in commercial acting.",
     fullBio: "Noah Honeywell represents the new generation of talent breaking into the industry. With a natural ease in front of the camera and an approachable presence, Noah has quickly built a portfolio of modeling work for youth-focused brands. His acting career is developing alongside his modeling, with recent bookings in commercials and digital content. Noah's authentic social media presence has attracted a loyal following.",
-    primaryPhoto: "https://images.unsplash.com/photo-1488161628813-04466f0016e0?w=600&h=800&fit=crop",
+    primaryPhoto: "https://images.unsplash.com/photo-1614289371518-722f2615943d?w=600&h=800&fit=crop",
     photos: [
-      "https://images.unsplash.com/photo-1488161628813-04466f0016e0?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1542178243-bc20204b769f?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1499996860823-5f5ab8920a4e?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1506634572416-48cdfe530110?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1614289371518-722f2615943d?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1605462863863-10d9e47e15ee?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1618641986557-1ecd230959aa?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1600486913747-55e5470d6f40?w=800&h=1000&fit=crop",
     ],
     socials: {
       instagram: "https://instagram.com/noahhoneywell",
@@ -269,6 +379,21 @@ export const talentRoster: TalentPerson[] = [
     location: "Los Angeles, CA",
     featured: false,
     active: true,
+    portfolio: [
+      {
+        image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&h=1000&fit=crop",
+        title: "Youth Campaign",
+        type: "campaign",
+        brand: "Adidas"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=800&h=1000&fit=crop",
+        title: "Commercial Spot",
+        type: "campaign",
+        brand: "Gap"
+      },
+    ],
+    notableWork: ["Adidas", "Gap", "Hollister"],
   },
   {
     id: "7",
@@ -296,6 +421,27 @@ export const talentRoster: TalentPerson[] = [
     location: "Atlanta, GA",
     featured: true,
     active: true,
+    portfolio: [
+      {
+        image: "https://images.unsplash.com/photo-1520367445093-50dc08a59d9d?w=800&h=1000&fit=crop",
+        title: "Music Video",
+        type: "collaboration",
+        brand: "Def Jam"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop",
+        title: "Fashion Editorial",
+        type: "editorial",
+        brand: "Hypebeast"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&h=1000&fit=crop",
+        title: "Brand Partnership",
+        type: "campaign",
+        brand: "Puma"
+      },
+    ],
+    notableWork: ["Def Jam Records", "Hypebeast", "Puma", "BET"],
   },
   {
     id: "8",
@@ -322,6 +468,21 @@ export const talentRoster: TalentPerson[] = [
     location: "New York, NY",
     featured: false,
     active: true,
+    portfolio: [
+      {
+        image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=1000&fit=crop",
+        title: "Indie Film",
+        type: "collaboration",
+        brand: "Sundance"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?w=800&h=1000&fit=crop",
+        title: "Streaming Series",
+        type: "collaboration",
+        brand: "Netflix"
+      },
+    ],
+    notableWork: ["Sundance", "Netflix", "AMC"],
   },
   {
     id: "9",
@@ -349,6 +510,27 @@ export const talentRoster: TalentPerson[] = [
     location: "Los Angeles, CA",
     featured: false,
     active: true,
+    portfolio: [
+      {
+        image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&h=1000&fit=crop",
+        title: "Producer Session",
+        type: "collaboration",
+        brand: "Interscope"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=1000&fit=crop",
+        title: "Fashion Campaign",
+        type: "campaign",
+        brand: "H&M"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1496440737103-cd596325d314?w=800&h=1000&fit=crop",
+        title: "Music Festival",
+        type: "collaboration",
+        brand: "Rolling Loud"
+      },
+    ],
+    notableWork: ["Interscope Records", "H&M", "Rolling Loud"],
   },
 ];
 

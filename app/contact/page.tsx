@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import PageHero from "@/components/page-hero";
 import {
   MapPin,
   Send,
@@ -97,34 +98,13 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] pt-24">
-      {/* Hero Section */}
-      <section className="section-padding pb-12">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#d4a853] mb-4 block">
-              Get in Touch
-            </span>
-            <h1
-              className="heading-xl mb-6"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              Let&apos;s Start a{" "}
-              <span className="text-gradient">Conversation</span>
-            </h1>
-            <p className="text-lg text-[#a3a3a3]">
-              Whether you&apos;re a brand looking to partner, a creator seeking
-              representation, or just want to say hello – we&apos;d love to hear
-              from you.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <div className="min-h-screen bg-[#0a0a0a]">
+      <PageHero
+        label="Get in Touch"
+        title={<>Let&apos;s Start a <span className="text-gradient">Conversation</span></>}
+        description="Whether you're a brand looking to partner, a creator seeking representation, or just want to say hello – we'd love to hear from you."
+        compact
+      />
 
       {/* Main Content */}
       <section className="section-padding pt-0">

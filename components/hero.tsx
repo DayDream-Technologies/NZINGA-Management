@@ -5,9 +5,22 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden texture-grain-strong">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-[#0a0a0a]">
+        {/* Background Image Layer - Professional fashion/talent imagery */}
+        <div 
+          className="absolute inset-0 opacity-50"
+          style={{
+            backgroundImage: `url(/hero-image.avif)`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 30%',
+          }}
+        />
+        
+        {/* Dark overlay on background image */}
+        <div className="absolute inset-0 bg-[#0a0a0a]/40" />
+        
         {/* Animated Gradient Orbs */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="animated-gradient-orb animated-gradient-orb-1" />
@@ -23,8 +36,8 @@ export default function Hero() {
           className="absolute inset-0 animated-grid"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(212, 168, 83, 0.15) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(212, 168, 83, 0.15) 1px, transparent 1px)
+              linear-gradient(rgba(212, 168, 83, 0.12) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(212, 168, 83, 0.12) 1px, transparent 1px)
             `,
             backgroundSize: '80px 80px',
           }}

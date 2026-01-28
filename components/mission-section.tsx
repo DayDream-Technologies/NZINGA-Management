@@ -39,7 +39,7 @@ export default function MissionSection() {
   return (
     <section
       ref={containerRef}
-      className="section-padding bg-[#0a0a0a] relative overflow-hidden"
+      className="section-padding bg-[#0a0a0a] relative overflow-hidden texture-grain"
     >
       {/* Animated Background */}
       <div className="absolute inset-0">

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import PageHero from "@/components/page-hero";
 import {
   User,
   Mail,
@@ -159,34 +160,13 @@ export default function JoinPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] pt-24">
-      {/* Hero Section */}
-      <section className="section-padding pb-12">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#d4a853] mb-4 block">
-              Join Our Family
-            </span>
-            <h1
-              className="heading-xl mb-6"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              Ready to Elevate Your{" "}
-              <span className="text-gradient">Career?</span>
-            </h1>
-            <p className="text-lg text-[#a3a3a3]">
-              Apply to join NZINGA Management and unlock your full potential as a
-              creator. We&apos;re looking for passionate individuals ready to take
-              their career to the next level.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <div className="min-h-screen bg-[#0a0a0a]">
+      <PageHero
+        label="Join Our Family"
+        title={<>Ready to Elevate Your <span className="text-gradient">Career?</span></>}
+        description="Apply to join NZINGA Management and unlock your full potential as a creator. We're looking for passionate individuals ready to take their career to the next level."
+        compact
+      />
 
       {/* Benefits Section */}
       <section className="pb-16">

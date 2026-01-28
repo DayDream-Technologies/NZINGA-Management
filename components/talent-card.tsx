@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { Instagram, Youtube, Music } from "lucide-react";
 import XIcon from "@/components/icons/x-icon";
@@ -13,14 +14,49 @@ interface TalentCardProps {
 
 export default function TalentCard({ talent, index }: TalentCardProps) {
   const age = calculateAge(talent.birthDate);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Scroll-based animations
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+  
+  // More dramatic scale: 0.75 -> 1.0
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.5], [0.75, 0.95, 1]);
+  
+  // Parallax Y movement based on position in grid
+  const yOffset = index % 2 === 1 ? [40, 0, -20] : [20, 0, -10];
+  const y = useTransform(scrollYProgress, [0, 0.4, 0.8], yOffset);
+  
+  // Subtle rotation for dynamic feel
+  const rotateAmount = index % 2 === 1 ? [2, 0, -1] : [-2, 0, 1];
+  const rotate = useTransform(scrollYProgress, [0, 0.4, 0.8], rotateAmount);
+
+  // Enhanced staggered offset - alternating pattern with more variation
+  const getStaggerClass = () => {
+    const position = index % 4;
+    switch (position) {
+      case 1: return "lg:mt-16";
+      case 2: return "lg:mt-8";
+      case 3: return "lg:mt-24";
+      default: return "";
+    }
+  };
+
+  // Row-based delay for synchronized loading
+  const rowNumber = Math.floor(index / 4);
+  const positionInRow = index % 4;
+  const animationDelay = rowNumber * 0.15 + positionInRow * 0.05;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.05 }}
-      className="group relative"
+      ref={cardRef}
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: animationDelay, ease: "easeOut" }}
+      style={{ scale, y, rotate }}
+      className={`group relative origin-center ${getStaggerClass()}`}
     >
       <Link href={`/talent/${talent.slug}`}>
         <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-[#111111]">

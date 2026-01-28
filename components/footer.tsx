@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Instagram, Youtube } from "lucide-react";
 import XIcon from "@/components/icons/x-icon";
 
 const footerLinks = [
   { href: "/talent", label: "Talent" },
+  { href: "/services", label: "Services" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
   { href: "/join", label: "Join Us" },
@@ -18,39 +20,6 @@ const socialLinks = [
   { href: "https://tiktok.com/@nzingamgmt", icon: Youtube, label: "TikTok" },
 ];
 
-// Logo component with inline SVG to avoid path issues
-function Logo({ size = 32 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 48 48"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect width="48" height="48" rx="8" fill="#0a0a0a" />
-      <path
-        d="M12 36V12H17.5L30.5 28.5V12H36V36H30.5L17.5 19.5V36H12Z"
-        fill="url(#footer-gold-gradient)"
-      />
-      <defs>
-        <linearGradient
-          id="footer-gold-gradient"
-          x1="12"
-          y1="12"
-          x2="36"
-          y2="36"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#d4a853" />
-          <stop offset="0.5" stopColor="#f0d78c" />
-          <stop offset="1" stopColor="#d4a853" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
-
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -61,13 +30,13 @@ export default function Footer() {
           {/* Brand & Copyright */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
             <Link href="/" className="flex items-center gap-2">
-              <Logo size={36} />
-              <span
-                className="text-xl font-medium tracking-wide text-[#f5f5f5]"
-                style={{ fontFamily: "var(--font-playfair)" }}
-              >
-                Management
-              </span>
+              <Image
+                src="/logo.avif"
+                alt="NZINGA Management"
+                width={120}
+                height={32}
+                className="h-8 w-auto"
+              />
             </Link>
             <span className="hidden sm:block text-[#d4a853]/30">|</span>
             <p className="text-sm text-[#a3a3a3]">

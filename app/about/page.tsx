@@ -1,83 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Target,
-  Users,
-  TrendingUp,
-  Award,
-  Heart,
-  Globe,
-  Lightbulb,
-  Shield,
-  MapPin,
-} from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import PageHero from "@/components/page-hero";
+import Testimonials from "@/components/testimonials";
 
-const timeline = [
-  {
-    year: "2020",
-    title: "The Beginning",
-    description:
-      "NZINGA Management was founded with a vision to revolutionize talent representation in the digital age.",
-  },
-  {
-    year: "2021",
-    title: "Rapid Growth",
-    description:
-      "Expanded our roster to 10+ creators and secured our first major brand partnerships.",
-  },
-  {
-    year: "2022",
-    title: "National Expansion",
-    description:
-      "Opened offices in New York and Atlanta, bringing our total to 5 nationwide locations.",
-  },
-  {
-    year: "2023",
-    title: "Industry Recognition",
-    description:
-      "Named one of the top emerging talent agencies by multiple industry publications.",
-  },
-  {
-    year: "2024",
-    title: "Milestone Achievements",
-    description:
-      "Reached 20+ creators, 15+ brand partnerships, and expanded to 10 offices nationwide.",
-  },
-  {
-    year: "2025",
-    title: "The Future",
-    description:
-      "Continuing to innovate and lead the industry in creator representation and brand partnerships.",
-  },
-];
-
-const values = [
-  {
-    icon: Heart,
-    title: "Passion",
-    description:
-      "We're genuinely passionate about our creators' success and pour our hearts into every partnership.",
-  },
-  {
-    icon: Shield,
-    title: "Integrity",
-    description:
-      "Transparency and honesty are at the core of everything we do. Your trust is our priority.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Innovation",
-    description:
-      "We stay ahead of industry trends to provide cutting-edge strategies for our talent.",
-  },
-  {
-    icon: Globe,
-    title: "Diversity",
-    description:
-      "We celebrate diverse voices and perspectives, believing they make our community stronger.",
-  },
+const brands = [
+  { name: "Isaiahs Hub", logo: "/brands/isaiahs-hub.png" },
+  { name: "Dubby", logo: "/brands/dubby.png" },
+  { name: "Prime Video", logo: "/brands/prime-video.png" },
+  { name: "Meta", logo: "/brands/meta.png" },
+  { name: "Royale Battlefield", logo: "/brands/royale-battlefield.png" },
 ];
 
 const team = [
@@ -107,238 +41,58 @@ const team = [
   },
 ];
 
-const offices = [
-  { city: "Los Angeles", state: "CA", type: "Headquarters" },
-  { city: "New York", state: "NY", type: "East Coast Hub" },
-  { city: "Atlanta", state: "GA", type: "Southeast Office" },
-  { city: "Chicago", state: "IL", type: "Midwest Office" },
-  { city: "Miami", state: "FL", type: "Florida Office" },
-];
-
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] pt-24">
-      {/* Hero Section */}
-      <section className="section-padding">
+    <div className="min-h-screen bg-[#0a0a0a]">
+      <PageHero
+        label="About Us"
+        title={<>Shaping the Future of <span className="text-gradient">Creator Culture</span></>}
+        description="NZINGA Management is more than an agency – we're a family of passionate professionals dedicated to elevating creators and building meaningful brand partnerships."
+      />
+
+      {/* Trusted Brands Section */}
+      <section className="py-16 bg-[#0a0a0a] border-y border-[#262626]">
         <div className="container-custom">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-10"
           >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#d4a853] mb-4 block">
-              About Us
-            </span>
-            <h1
-              className="heading-xl mb-6"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              Shaping the Future of{" "}
-              <span className="text-gradient">Creator Culture</span>
-            </h1>
-            <p className="text-lg text-[#a3a3a3]">
-              NZINGA Management is more than an agency – we&apos;re a family of
-              passionate professionals dedicated to elevating creators and
-              building meaningful brand partnerships.
+            <p className="text-sm text-[#a3a3a3] uppercase tracking-[0.2em]">
+              Trusted by leading brands
             </p>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Story Section */}
-      <section className="section-padding bg-[#111111]">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="text-sm uppercase tracking-[0.3em] text-[#d4a853] mb-4 block">
-                Our Story
-              </span>
-              <h2
-                className="heading-lg mb-8"
-                style={{ fontFamily: "var(--font-playfair)" }}
-              >
-                Built on a Foundation of{" "}
-                <span className="text-gradient">Trust & Excellence</span>
-              </h2>
-              <div className="space-y-6 text-[#a3a3a3]">
-                <p>
-                  Founded in 2020, NZINGA Management emerged from a simple yet
-                  powerful belief: every creator deserves representation that
-                  truly understands their vision and fights for their success.
-                </p>
-                <p>
-                  Our founder, Alexandra Nzinga, recognized a gap in the industry
-                  – talented creators were being underserved by agencies that
-                  treated them as numbers rather than individuals. She set out to
-                  build something different.
-                </p>
-                <p>
-                  Today, we represent over 20 creators and influencers, have
-                  facilitated 15+ major brand partnerships, and operate from 10
-                  offices nationwide. But our mission remains the same: to help
-                  you form and create your own success, personally and
-                  professionally.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Stats Grid */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="grid grid-cols-2 gap-6"
-            >
-              {[
-                { icon: Users, value: "20+", label: "Creators" },
-                { icon: Award, value: "15+", label: "Brand Deals" },
-                { icon: Globe, value: "10", label: "Offices" },
-                { icon: TrendingUp, value: "50+", label: "Employees" },
-              ].map((stat, index) => (
-                <div
-                  key={stat.label}
-                  className="p-6 bg-[#0a0a0a] rounded-lg border border-[#262626] text-center"
-                >
-                  <stat.icon className="w-8 h-8 text-[#d4a853] mx-auto mb-4" />
-                  <div
-                    className="text-3xl font-bold text-gradient mb-2"
-                    style={{ fontFamily: "var(--font-playfair)" }}
-                  >
-                    {stat.value}
-                  </div>
-                  <p className="text-sm text-[#a3a3a3] uppercase tracking-wider">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#d4a853] mb-4 block">
-              Our Journey
-            </span>
-            <h2
-              className="heading-lg"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              Milestones Along the Way
-            </h2>
-          </motion.div>
-
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-[#262626] md:-translate-x-1/2" />
-
-            {/* Timeline Items */}
-            <div className="space-y-12">
-              {timeline.map((item, index) => (
-                <motion.div
-                  key={item.year}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`relative flex items-center ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Dot */}
-                  <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-[#d4a853] rounded-full md:-translate-x-1/2 z-10" />
-
-                  {/* Content */}
-                  <div
-                    className={`ml-12 md:ml-0 md:w-1/2 ${
-                      index % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"
-                    }`}
-                  >
-                    <span className="text-[#d4a853] font-bold text-lg">
-                      {item.year}
-                    </span>
-                    <h3
-                      className="text-xl font-semibold mt-2 mb-2"
-                      style={{ fontFamily: "var(--font-playfair)" }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p className="text-[#a3a3a3]">{item.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="section-padding bg-[#111111]">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#d4a853] mb-4 block">
-              What We Stand For
-            </span>
-            <h2
-              className="heading-lg"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              Our Core Values
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
+          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-12">
+            {brands.map((brand) => (
               <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 30 }}
+                key={brand.name}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="p-8 bg-[#0a0a0a] rounded-lg border border-[#262626] hover:border-[#d4a853]/50 transition-colors duration-500 group text-center"
+                transition={{ duration: 0.5 }}
+                className="flex items-center justify-center px-6 h-[60px] rounded-lg transition-all duration-300"
+                style={{ background: 'linear-gradient(135deg, #e8e8e8 0%, #c0c0c0 50%, #d8d8d8 100%)' }}
               >
-                <div className="w-16 h-16 rounded-full bg-[#1a1a1a] flex items-center justify-center mx-auto mb-6 group-hover:bg-[#d4a853]/10 transition-colors duration-500">
-                  <value.icon size={28} className="text-[#d4a853]" />
-                </div>
-                <h3
-                  className="text-xl font-semibold mb-3"
-                  style={{ fontFamily: "var(--font-playfair)" }}
-                >
-                  {value.title}
-                </h3>
-                <p className="text-[#a3a3a3] text-sm leading-relaxed">
-                  {value.description}
-                </p>
+                <Image
+                  src={brand.logo}
+                  alt={brand.name}
+                  width={120}
+                  height={40}
+                  className="object-contain h-[40px] w-auto"
+                />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <Testimonials />
+
       {/* Team Section */}
-      <section className="section-padding">
+      <section className="section-padding bg-[#0a0a0a]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -390,50 +144,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Offices Section */}
-      <section className="section-padding bg-[#111111]">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#d4a853] mb-4 block">
-              Nationwide Presence
-            </span>
-            <h2
-              className="heading-lg"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              Our Offices
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {offices.map((office, index) => (
-              <motion.div
-                key={office.city}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 bg-[#0a0a0a] rounded-lg border border-[#262626] hover:border-[#d4a853]/50 transition-colors duration-500 text-center"
-              >
-                <MapPin className="w-6 h-6 text-[#d4a853] mx-auto mb-3" />
-                <h3 className="font-semibold mb-1">
-                  {office.city}, {office.state}
-                </h3>
-                <p className="text-xs text-[#a3a3a3]">{office.type}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="section-padding">
+      <section className="section-padding bg-[#111111]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

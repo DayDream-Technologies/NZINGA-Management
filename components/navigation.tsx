@@ -2,51 +2,28 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "/talent", label: "Talent" },
+  { href: "/services", label: "Services" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ];
 
-// Logo component with inline SVG to avoid path issues
-function Logo({ size = 40 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 48 48"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect width="48" height="48" rx="8" fill="#0a0a0a" />
-      <path
-        d="M12 36V12H17.5L30.5 28.5V12H36V36H30.5L17.5 19.5V36H12Z"
-        fill="url(#nav-gold-gradient)"
-      />
-      <defs>
-        <linearGradient
-          id="nav-gold-gradient"
-          x1="12"
-          y1="12"
-          x2="36"
-          y2="36"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#d4a853" />
-          <stop offset="0.5" stopColor="#f0d78c" />
-          <stop offset="1" stopColor="#d4a853" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
-
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Check if link is active (exact match or starts with for nested routes like /talent/[slug])
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(href + "/");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,13 +54,14 @@ export default function Navigation() {
                 whileHover={{ scale: 1.02 }}
                 className="flex items-center gap-3"
               >
-                <Logo size={40} />
-                <span
-                  className="text-xl md:text-2xl font-medium tracking-wide text-[#f5f5f5]"
-                  style={{ fontFamily: "var(--font-playfair)" }}
-                >
-                  Management
-                </span>
+                <Image
+                  src="/logo.avif"
+                  alt="NZINGA Management"
+                  width={140}
+                  height={40}
+                  className="h-10 w-auto"
+                  priority
+                />
               </motion.div>
             </Link>
 
@@ -93,12 +71,16 @@ export default function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm uppercase tracking-widest text-[#a3a3a3] hover:text-[#f5f5f5] transition-colors duration-300 link-hover"
+                  className={`text-sm uppercase tracking-widest transition-colors duration-300 link-hover ${
+                    isActive(link.href)
+                      ? "text-[#d4a853]"
+                      : "text-[#a3a3a3] hover:text-[#f5f5f5]"
+                  }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Link href="/join" className="btn-primary">
+              <Link href="/join" className={isActive("/join") ? "btn-primary ring-2 ring-[#d4a853]" : "btn-primary"}>
                 Join Us
               </Link>
             </div>
@@ -150,7 +132,11 @@ export default function Navigation() {
                     <Link
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block text-2xl uppercase tracking-widest text-[#a3a3a3] hover:text-[#d4a853] transition-colors duration-300"
+                      className={`block text-2xl uppercase tracking-widest transition-colors duration-300 ${
+                        isActive(link.href)
+                          ? "text-[#d4a853]"
+                          : "text-[#a3a3a3] hover:text-[#d4a853]"
+                      }`}
                       style={{ fontFamily: "var(--font-playfair)" }}
                     >
                       {link.label}
