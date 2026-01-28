@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { getAssetPath } from "@/lib/utils";
 
 export default function Hero() {
   return (
@@ -12,7 +13,7 @@ export default function Hero() {
         <div 
           className="absolute inset-0 opacity-50"
           style={{
-            backgroundImage: `url(/hero-image.avif)`,
+            backgroundImage: `url(${getAssetPath("/hero-image.avif")})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center 30%',
           }}

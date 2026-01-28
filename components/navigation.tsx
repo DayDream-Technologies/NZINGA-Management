@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { getAssetPath } from "@/lib/utils";
 
 const navLinks = [
   { href: "/talent", label: "Talent" },
@@ -55,7 +56,7 @@ export default function Navigation() {
                 className="flex items-center gap-3"
               >
                 <Image
-                  src="/logo.avif"
+                  src={getAssetPath("/logo.avif")}
                   alt="NZINGA Management"
                   width={140}
                   height={40}

@@ -5,13 +5,14 @@ import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/page-hero";
 import Testimonials from "@/components/testimonials";
+import { getAssetPath } from "@/lib/utils";
 
 const brands = [
-  { name: "Isaiahs Hub", logo: "/brands/isaiahs-hub.png" },
-  { name: "Dubby", logo: "/brands/dubby.png" },
-  { name: "Prime Video", logo: "/brands/prime-video.png" },
-  { name: "Meta", logo: "/brands/meta.png" },
-  { name: "Royale Battlefield", logo: "/brands/royale-battlefield.png" },
+  { name: "Isaiahs Hub", logo: getAssetPath("/brands/isaiahs-hub.png") },
+  { name: "Dubby", logo: getAssetPath("/brands/dubby.png") },
+  { name: "Prime Video", logo: getAssetPath("/brands/prime-video.png") },
+  { name: "Meta", logo: getAssetPath("/brands/meta.png") },
+  { name: "Royale Battlefield", logo: getAssetPath("/brands/royale-battlefield.png") },
 ];
 
 const team = [

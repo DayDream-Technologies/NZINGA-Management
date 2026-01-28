@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { getAssetPath } from "@/lib/utils";
 
 interface PageHeroProps {
   label: string;
@@ -18,7 +19,7 @@ export default function PageHero({ label, title, description, compact = false }:
         <div 
           className="absolute inset-0 opacity-50"
           style={{
-            backgroundImage: `url(/hero-image.avif)`,
+            backgroundImage: `url(${getAssetPath("/hero-image.avif")})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center 30%',
           }}

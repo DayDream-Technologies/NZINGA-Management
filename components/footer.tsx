@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Instagram, Youtube } from "lucide-react";
 import XIcon from "@/components/icons/x-icon";
+import { getAssetPath } from "@/lib/utils";
 
 const footerLinks = [
   { href: "/talent", label: "Talent" },
@@ -31,7 +32,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
             <Link href="/" className="flex items-center gap-2">
               <Image
-                src="/logo.avif"
+                src={getAssetPath("/logo.avif")}
                 alt="NZINGA Management"
                 width={120}
                 height={32}
